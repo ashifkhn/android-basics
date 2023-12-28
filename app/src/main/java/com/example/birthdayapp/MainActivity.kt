@@ -1,12 +1,12 @@
 package com.example.birthdayapp
 
 import android.os.Bundle
-import android.os.Message
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
@@ -15,6 +15,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -31,7 +32,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    GreetingText(message = "Happy Birthday Munna!" ,from="someone Ashif")
+                    GreetingImage("Happy Birthday Sam!", "From Emma")
                 }
             }
         }
@@ -55,8 +56,8 @@ class MainActivity : ComponentActivity() {
     )
     Text(text = from ,
         fontSize = 26 .sp,
-        modifier=Modifier
-            .padding(16 .dp)
+        modifier= Modifier
+            .padding(16.dp)
             .align(alignment = Alignment.End)
 //        lineHeight = 76 .sp
     )
@@ -64,6 +65,21 @@ class MainActivity : ComponentActivity() {
 
 }
 
+
+
+@Composable
+fun GreetingImage(message: String,from: String){
+    val image= painterResource(id = R.drawable.androidparty)
+    Box {
+    Image(painter = image, contentDescription =null )
+        GreetingText(message = message, from =from ,
+            modifier = Modifier.fillMaxSize()
+                .padding(8 .dp)
+        
+        )
+    }
+
+}
 
 @Preview(showBackground = true,
     showSystemUi = true,
@@ -73,6 +89,6 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun GreetingPreview() {
     BirthdayAppTheme {
-    GreetingText(message = "Happy Birthday Munna!" ,from="someone Ashif")
+        GreetingImage("Happy Birthday Sam!", "From Emma")
     }
 }
